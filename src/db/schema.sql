@@ -112,9 +112,14 @@ CREATE TABLE IF NOT EXISTS bookings (
     address_line_1 VARCHAR(255) NOT NULL,
     address_line_2 VARCHAR(255),
     address_line_3 VARCHAR(255),
-    city VARCHAR(100) NOT NULL,
-    postcode VARCHAR(20) NOT NULL,
+    city VARCHAR(100), -- Explicitly mentioned as NOT required in user list (implied optional)
+    postcode VARCHAR(20), -- Optional now
     country VARCHAR(100) NOT NULL,
+    
+    -- Identification
+    passport_id VARCHAR(50),
+    id_card VARCHAR(50),
+    extra_details TEXT,
 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

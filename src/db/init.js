@@ -6,7 +6,10 @@ require("dotenv").config();
 const dbConfig = {
   host: process.env.DB_HOST || "localhost",
   user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD, // Must be set in .env
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT || 3306,
+  database: process.env.DB_NAME, // Just for connection setup if needed later, but createConnection ignores it usually if not specified
+  ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : undefined,
   multipleStatements: true,
 };
 
@@ -14,8 +17,9 @@ async function initDatabase() {
   let connection;
   try {
     // 1. Connect without database to create it if needed
-    console.log("Connecting to MySQL server...");
-    connection = await mysql.createConnection(dbConfig);
+    const { database, ...connectConfig } = dbConfig;
+    console.log("Connecting to MySQL server...", { host: connectConfig.host, port: connectConfig.port });
+    connection = await mysql.createConnection(connectConfig);
 
     const dbName = process.env.DB_NAME || "car_rental_db";
     console.log(`Creating database '${dbName}' if it doesn't exist...`);

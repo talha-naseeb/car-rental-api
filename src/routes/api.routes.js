@@ -7,6 +7,6 @@ const bookingsController = require("../controllers/bookings.controller");
 router.get("/cars", carsController.getAvailableCars);
 
 // Create Booking
-router.post("/bookings", bookingsController.createBooking);
+router.post("/create-bookings", bookingsController.createBooking);
 
 module.exports = router;

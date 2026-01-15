@@ -7,8 +7,8 @@ const app = express();
 
 // Middleware - Server Restart Triggered
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // Routes
 const companyRoutes = require("./routes/company.routes");
