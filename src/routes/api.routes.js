@@ -6,6 +6,7 @@ const authController = require("../controllers/auth.controller");
 
 // Check Availability
 router.get("/cars", carsController.getAvailableCars);
+router.get("/admin/cars", carsController.getAllCars);
 
 // Create Booking
 router.post("/create-bookings", bookingsController.createBooking);

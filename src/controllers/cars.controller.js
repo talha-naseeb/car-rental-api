@@ -49,3 +49,13 @@ exports.getAvailableCars = async (req, res) => {
     res.status(500).send({ message: "Error retrieval available cars." });
   }
 };
+
+exports.getAllCars = async (req, res) => {
+  try {
+    const [cars] = await db.query("SELECT * FROM cars");
+    res.status(200).json(cars);
+  } catch (err) {
+    console.error("Error fetching all cars:", err);
+    res.status(500).send({ message: "Error retrieving cars." });
+  }
+};
