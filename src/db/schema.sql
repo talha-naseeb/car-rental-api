@@ -165,3 +165,14 @@ CREATE TABLE IF NOT EXISTS service_records (
 INSERT INTO service_records (car_id, start_date, end_date, description, cost, status) VALUES
 (4, DATE_ADD(NOW(), INTERVAL -1 DAY), DATE_ADD(NOW(), INTERVAL 1 DAY), 'Regular oil change and brake check', 450.00, 'in_progress'),
 (1, DATE_ADD(NOW(), INTERVAL -30 DAY), DATE_ADD(NOW(), INTERVAL -29 DAY), 'Tire replacement', 1200.00, 'completed');
+
+-- Users Table for Authentication
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'staff') DEFAULT 'admin',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users (username, password, role) VALUES ('admin', 'admin123', 'admin');
